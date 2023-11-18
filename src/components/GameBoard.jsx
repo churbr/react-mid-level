@@ -6,16 +6,18 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard() {
+export default function GameBoard({ onSelectBox, active }) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard); 
 
   const handleSelectBox = (row, col) => {
         setGameBoard((prevState) => {
           const updatedBoard = [...prevState.map((rows) => [...rows])];
-          updatedBoard[row][col] = 'X';
+          updatedBoard[row][col] = active;
 
           return updatedBoard;
         });
+
+        onSelectBox();
   }
 
   return (
