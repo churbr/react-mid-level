@@ -6,7 +6,16 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard({ onSelectBox }) {
+export default function GameBoard({ onSelectBox, turns }) {
+  let gameBoard = initialGameBoard;
+
+  for (const turn of turns) {
+    const { square, player } = turn;
+    const { row, col } = square;
+
+    gameBoard[row][col] = player;
+  }
+
   // const [gameBoard, setGameBoard] = useState(initialGameBoard); 
 
   // This function is lift up to App.jsx
