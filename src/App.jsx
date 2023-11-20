@@ -4,9 +4,25 @@ import { useState } from 'react';
 
 function App() {
   const [activePlayer, setActivePlayer] = useState('X');
+  const [gameTurn, setGameTurn] = useState([]);
 
-  const handleSelectBox = () => {
+  const handleSelectBox = (rowIndex, colIndex) => {
     setActivePlayer((curActivePlayer) => curActivePlayer === 'X' ? 'O': 'X');
+
+    setGameTurn((prevTurn) => {
+      let currPlayer = 'X';
+
+      if(prevTurn.length > 0 && prevTurn[0].player === 'X') {
+        currPlayer = 'O';
+      }
+
+      const updatedTurn = [
+        { square: { row: rowIndex, col: colIndex }, player: currPlayer },
+        ...prevTurn
+      ]
+
+      return updatedTurn;
+    });
   }
 
   return (

@@ -6,19 +6,20 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard({ onSelectBox, active }) {
-  const [gameBoard, setGameBoard] = useState(initialGameBoard); 
+export default function GameBoard({ onSelectBox }) {
+  // const [gameBoard, setGameBoard] = useState(initialGameBoard); 
 
-  const handleSelectBox = (row, col) => {
-        setGameBoard((prevState) => {
-          const updatedBoard = [...prevState.map((rows) => [...rows])];
-          updatedBoard[row][col] = active;
+  // This function is lift up to App.jsx
+  // const handleSelectBox = (row, col) => {
+  //       setGameBoard((prevState) => {
+  //         const updatedBoard = [...prevState.map((rows) => [...rows])];
+  //         updatedBoard[row][col] = active;
 
-          return updatedBoard;
-        });
+  //         return updatedBoard;
+  //       });
 
-        onSelectBox();
-  }
+  //       onSelectBox();
+  // }
 
   return (
     <ol id="game-board">
@@ -27,7 +28,7 @@ export default function GameBoard({ onSelectBox, active }) {
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() => handleSelectBox(rowIndex, colIndex)}>{playerSymbol}</button>
+                <button onClick={() => onSelectBox(rowIndex, colIndex)}>{playerSymbol}</button>
               </li>
             ))}
           </ol>
