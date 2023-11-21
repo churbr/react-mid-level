@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const initialGameBoard = [
   [null, null, null],
@@ -16,7 +16,7 @@ export default function GameBoard({ onSelectBox, turns }) {
     gameBoard[row][col] = player;
   }
 
-  // const [gameBoard, setGameBoard] = useState(initialGameBoard); 
+  // const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   // This function is lift up to App.jsx
   // const handleSelectBox = (row, col) => {
@@ -37,7 +37,12 @@ export default function GameBoard({ onSelectBox, turns }) {
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() => onSelectBox(rowIndex, colIndex)}>{playerSymbol}</button>
+                <button
+                  onClick={() => onSelectBox(rowIndex, colIndex)}
+                  disabled={playerSymbol !== null}
+                >
+                  {playerSymbol}
+                </button>
               </li>
             ))}
           </ol>
