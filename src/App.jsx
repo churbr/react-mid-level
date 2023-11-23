@@ -1,6 +1,7 @@
 import Player from "./components/Player";
 import GameBoard from "./components/GameBoard";
 import Log from "./components/Log";
+import GameOver from "./components/GameOver";
 import { useState } from "react";
 import { WINNING_COMBINATIONS } from "./components/winning-combinations";
 
@@ -53,6 +54,8 @@ function App() {
     }
   }
 
+  let hasDraw = gameTurn.length === 9 && !winner;
+
   const handleSelectBox = (rowIndex, colIndex) => {
     // setActivePlayer((curActivePlayer) => curActivePlayer === 'X' ? 'O': 'X');
 
@@ -71,7 +74,7 @@ function App() {
   return (
     <main>
       <div id="game-container">
-        { winner && <h3>You win, {winner}!</h3> }
+        { (winner || hasDraw) && <GameOver winner={winner} /> }
         <ol id="players" className="highlight-player">
           <Player
             initialName="Player 1"
