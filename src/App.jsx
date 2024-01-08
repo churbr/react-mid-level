@@ -25,7 +25,7 @@ function App() {
   // const [activePlayer, setActivePlayer] = useState('X');
   const [gameTurn, setGameTurn] = useState([]);
 
-  let gameBoard = initialGameBoard;
+  let gameBoard = [...initialGameBoard.map(array => [...array])];
   let winner;
 
   for (const turn of gameTurn) {
@@ -71,10 +71,14 @@ function App() {
     });
   };
 
+  const handleRestart = () => {
+    setGameTurn([]);
+  }
+
   return (
     <main>
       <div id="game-container">
-        { (winner || hasDraw) && <GameOver winner={winner} /> }
+        { (winner || hasDraw) && <GameOver winner={winner} onRestart={handleRestart} /> }
         <ol id="players" className="highlight-player">
           <Player
             initialName="Player 1"
